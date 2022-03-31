@@ -1,8 +1,4 @@
 let modInfo = {
-	name: "The ??? Tree",
-	id: "mymod",
-	author: "nobody",
-	pointsName: "points",
 	name: "数竞树",
 	id: "xksakioi",
 	author: "xks",

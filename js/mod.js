@@ -3,6 +3,10 @@ let modInfo = {
 	id: "mymod",
 	author: "nobody",
 	pointsName: "points",
+	name: "数竞树",
+	id: "xksakioi",
+	author: "xks",
+	pointsName: "思路",
 	modFiles: ["layers.js", "tree.js"],
 
 	discordName: "",

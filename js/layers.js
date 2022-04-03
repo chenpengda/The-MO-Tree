@@ -85,6 +85,13 @@ addLayer("t", {
             tooltip: "入门",
         },
     },
+    doReset(resettingLayer){
+        let keep=[];
+        if(resettingLayer=='y')
+        {
+            if(hasMilestone('r',0)) player[this.layer].upgrades = player[this.layer].upgrades.concat([11,12,13,14]);
+        }
+    },
     row: 0, // Row the layer is in on the tree (0 is the first row)
     hotkeys: [
         {key: "t", description: "T: 重置思路", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
@@ -129,5 +136,5 @@ addLayer("y", {
     row: 1, // Row the layer is in on the tree (0 is the first row)
     hotkeys: [
     ],
-    layerShown(){return true}//hasUpgrade('t',23)
+    layerShown(){return hasUpgrade('t',23) }
 })

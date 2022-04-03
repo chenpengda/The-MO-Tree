@@ -24,43 +24,63 @@ addLayer("t", {
         11: {
             title: "起点",
             description: "每秒钟多获得1点灵感。",
-            cost: new Decimal(5),
+            cost: new Decimal(1),
             unlocked() { return player[this.layer].unlocked }, // The upgrade is only visible when this is true
             tooltip: "起点",
         },
         12: {
             title: "准备",
             description: "每秒钟多获得3点灵感。",
-            cost: new Decimal(20),
+            cost: new Decimal(3),
             unlocked() { return player[this.layer].unlocked }, // The upgrade is only visible when this is true
             tooltip: "准备",
         },
         13: {
             title: "尝试",
-            description: "每秒钟获得的灵感数翻1.2倍",
-            cost: new Decimal(50),
+            description: "每秒钟获得的灵感数翻2倍",
+            cost: new Decimal(10),
             unlocked() { return player[this.layer].unlocked }, // The upgrade is only visible when this is true
             tooltip: "尝试",
         },
         14: {
             title: "更多的尝试",
-            description: "每秒钟获得的灵感数再翻1.5倍",
-            cost: new Decimal(80),
+            description: "每秒钟获得的灵感数再翻1.8倍",
+            cost: new Decimal(20),
             unlocked() { return player[this.layer].unlocked }, // The upgrade is only visible when this is true
             tooltip: "更多的尝试",
         },
-        21: {
+        /*21: {
             title: "积累",
             description: "每秒钟获得的灵感数随思路增加",
             cost: new Decimal(100),
             unlocked() { return player[this.layer].unlocked }, // The upgrade is only visible when this is true
             tooltip: "积累",
+            effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
+                let ret = player[this.layer].points.add(1).pow(0.15) 
+                if (ret.gte("1e20000000")) ret = ret.sqrt().times("1e10000000")
+                return ret;
+            },
+            effectDisplay() { return format(this.effect())+"x" }, // Add formatting to the effect
+        },*/
+        22: {
+            title: "跃进",
+            description: "每秒钟获得的思路数随灵感增加",
+            cost: new Decimal(50),
+            unlocked() { return player[this.layer].unlocked }, // The upgrade is only visible when this is true
+            tooltip: "积累",
+            effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
+                let ret = player[this.layer].points.add(1).pow(0.15) 
+                if (ret.gte("1e20000000")) ret = ret.sqrt().times("1e10000000")
+                return ret;
+            },
+            effectDisplay() { return format(this.effect())+"x" }, // Add formatting to the effect
+            gainMult() {
+                let mult = new Decimal(1)
+                if (hasUpgrade('t', 22)) mult = mult.times(upgradeEffect('t', 22))
+                return mult
+            },
         },
     },
-    effect() {
-        return player[this.layer].points.add(1).pow(0.5)
-    },
-    effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
     row: 0, // Row the layer is in on the tree (0 is the first row)
     hotkeys: [
         {key: "t", description: "T: 重置思路", onPress(){if (canReset(this.layer)) doReset(this.layer)}},

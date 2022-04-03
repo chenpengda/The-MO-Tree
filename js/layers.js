@@ -35,6 +35,13 @@ addLayer("t", {
             unlocked() { return player[this.layer].unlocked }, // The upgrade is only visible when this is true
             tooltip: "准备",
         },
+        13: {
+            title: "跃进",
+            description: "每秒钟获得的灵感数翻1.2倍",
+            cost: new Decimal(50),
+            unlocked() { return player[this.layer].unlocked }, // The upgrade is only visible when this is true
+            tooltip: "跃进",
+        },
     },
     row: 0, // Row the layer is in on the tree (0 is the first row)
     hotkeys: [

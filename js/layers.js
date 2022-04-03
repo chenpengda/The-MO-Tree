@@ -33,21 +33,21 @@ addLayer("t", {
         12: {
             title: "准备",
             description: "每秒钟多获得3点灵感。",
-            cost: new Decimal(3),
+            cost: new Decimal(2),
             unlocked() { return player[this.layer].unlocked }, // The upgrade is only visible when this is true
             tooltip: "准备",
         },
         13: {
             title: "尝试",
             description: "每秒钟获得的灵感数翻2倍",
-            cost: new Decimal(5),
+            cost: new Decimal(3),
             unlocked() { return hasUpgrade('t', 12) }, // The upgrade is only visible when this is true
             tooltip: "尝试",
         },
         14: {
             title: "更多的尝试",
             description: "每秒钟获得的灵感数再翻1.8倍",
-            cost: new Decimal(8),
+            cost: new Decimal(6),
             unlocked() { return hasUpgrade('t', 12) }, // The upgrade is only visible when this is true
             tooltip: "更多的尝试",
         },
@@ -103,7 +103,7 @@ addLayer("y", {
     requires: ()=>{return !hasAchievement('a',31)&&hasMilestone('c',0)&&!hasMilestone('r',1)?new Decimal(1e5):new Decimal(2000)},
     color: "#2f4f2f",
     requires: new Decimal(10), // Can be a function that takes requirement increases into account
-    resource: "完成的题目", // Name of prestige currency
+    resource: "题目", // Name of prestige currency
     baseResource: "思路", // Name of resource prestige is based on
     baseAmount() {return player.points}, // Get the current amount of baseResource
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
@@ -117,18 +117,17 @@ addLayer("y", {
         return exp
     },
     upgrades: {
-        11: {
-            title: "起点",
-            description: "每秒钟多获得1点灵感。",
-            cost: new Decimal(1),
-            unlocked() { return player[this.layer].unlocked }, // The upgrade is only visible when this is true
-            tooltip: "起点",
+
+    },
+    milestones:{
+        0: {
+            requirementDescription: "1 题目",
+            effectDescription: "在题目重置时保留第一行思路升级。",
+            done() { return player.t.points.gte(1) }
         },
-        
     },
     row: 1, // Row the layer is in on the tree (0 is the first row)
     hotkeys: [
-        {key: "t", description: "T: 重置思路", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return hasUpgrade('t',23)}
+    layerShown(){return true}//hasUpgrade('t',23)
 })

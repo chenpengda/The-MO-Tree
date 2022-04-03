@@ -130,5 +130,5 @@ addLayer("y", {
     hotkeys: [
         {key: "t", description: "T: 重置思路", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return true}
+    layerShown(){return hasUpgrade('t',23)}
 })

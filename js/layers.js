@@ -39,14 +39,14 @@ addLayer("t", {
         },
         13: {
             title: "尝试",
-            description: "每秒钟获得的灵感数翻2倍",
+            description: "每秒钟获得的灵感数翻1.5倍",
             cost: new Decimal(3),
             unlocked() { return hasUpgrade('t', 12) }, // The upgrade is only visible when this is true
             tooltip: "尝试",
         },
         14: {
             title: "更多的尝试",
-            description: "每秒钟获得的灵感数再翻1.8倍",
+            description: "每秒钟获得的灵感数再翻1.5倍",
             cost: new Decimal(6),
             unlocked() { return hasUpgrade('t', 12) }, // The upgrade is only visible when this is true
             tooltip: "更多的尝试",
@@ -58,7 +58,7 @@ addLayer("t", {
             unlocked() { return hasUpgrade('t', 14) }, // The upgrade is only visible when this is true
             tooltip: "积累",
             effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
-                let ret = player[this.layer].points.add(1).pow(0.15) 
+                let ret = player[this.layer].points.add(1).pow(0.4) 
                 if (ret.gte("1e20000000")) ret = ret.sqrt().times("1e10000000")
                 return ret;
             },
@@ -67,11 +67,11 @@ addLayer("t", {
         22: {
             title: "跃进",
             description: "重置获得的思路数随灵感增加",
-            cost: new Decimal(20),
+            cost: new Decimal(40),
             unlocked() { return hasUpgrade('t', 21) }, // The upgrade is only visible when this is true
             tooltip: "跃进",
             effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
-                let ret = player[this.layer].points.add(1).pow(0.05) 
+                let ret = player[this.layer].points.add(1).pow(0.1) 
                 if (ret.gte("1e20000000")) ret = ret.sqrt().times("1e10000000")
                 return ret;
             },
@@ -87,9 +87,13 @@ addLayer("t", {
     },
     doReset(resettingLayer){
         let keep=[];
-        if(resettingLayer=='y')
+        if (layers[resettingLayer].row > this.row) 
         {
-            if(hasMilestone('y',0)) player[this.layer].upgrades = player[this.layer].upgrades.concat([11,12,13,14]);
+            layerDataReset('t', keep);
+            if(resettingLayer=='y')
+            {
+                if(hasMilestone('y',0)) player[this.layer].upgrades = player[this.layer].upgrades.concat([11,12,13,14]);
+            }
         }
     },
     row: 0, // Row the layer is in on the tree (0 is the first row)

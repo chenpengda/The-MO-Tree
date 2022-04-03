@@ -288,10 +288,10 @@ function addTime(diff, layer) {
 
 	//I am not that good to perfectly fix that leak. ~ DB Aarex
 	if (time + 0 !== time) {
-		console.log("Memory leak detected. Trying to fix...")
+		console.log("检测到内存泄露，正在尝试修复……")
 		time = toNumber(time)
 		if (isNaN(time) || time == 0) {
-			console.log("Couldn't fix! Resetting...")
+			console.log("无法修复……正在重置。")
 			time = layer ? player.timePlayed : 0
 			if (!layer) player.timePlayedReset = true
 		}

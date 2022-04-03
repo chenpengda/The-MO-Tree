@@ -2,7 +2,7 @@ let modInfo = {
 	name: "The MO tree",
 	id: "343434666",
 	author: "xks",
-	pointsName: "illusions",
+	pointsName: "灵感",
 	modFiles: ["layers.js", "tree.js"],
 
 	discordName: "luogu",
@@ -14,7 +14,7 @@ let modInfo = {
 // Set your version in num and name
 let VERSION = {
 	num: "0.0",
-	name: "Literally nothing",
+	name: "啥都不是",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
@@ -22,7 +22,7 @@ let changelog = `<h1>Changelog:</h1><br>
 		- xks akioi<br>
 		- Added stuff.`
 
-let winText = `Congratulations! You have reached the end and beaten this game, but for now...`
+let winText = `恭喜您完成了整个游戏`
 
 // If you add new functions anywhere inside of a layer, and those functions have an effect when called, add them here.
 // (The ones here are examples, all official functions are already taken care of)

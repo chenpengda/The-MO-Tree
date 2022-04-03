@@ -25,7 +25,4 @@ addLayer("t", {
         {key: "t", description: "T: Reset for thoughts", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
     layerShown(){return true}
-    upgrades: {
-
-    }
 })

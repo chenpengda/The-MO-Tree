@@ -229,7 +229,7 @@ function loadOptions() {
 
 function setupModInfo() {
 	modInfo.changelog = changelog;
-	modInfo.winText = winText ? winText : `Congratulations! You have reached the end and beaten this game, but for now...`;
+	modInfo.winText = winText ? winText : `恭喜您完成了整个游戏，但是现在……`;
 
 }
 function fixNaNs() {
@@ -246,7 +246,7 @@ function NaNcheck(data) {
 			if (!NaNalert) {
 				clearInterval(interval);
 				NaNalert = true;
-				alert("Invalid value found in player, named '" + item + "'. Please let the creator of this mod know! You can refresh the page, and you will be un-NaNed.")
+				alert("在玩家数据中发现名为 '" + item + "'的非法数据. 请告知游戏作者， 你可以刷新这个页面以重新开始。")
 				return
 			}
 		}
@@ -271,10 +271,10 @@ function exportSave() {
 }
 function importSave(imported = undefined, forced = false) {
 	if (imported === undefined)
-		imported = prompt("Paste your save here");
+		imported = prompt("请将存档代码粘贴至此处：");
 	try {
 		tempPlr = Object.assign(getStartPlayer(), JSON.parse(atob(imported)));
-		if (tempPlr.versionType != modInfo.id && !forced && !confirm("This save appears to be for a different mod! Are you sure you want to import?")) // Wrong save (use "Forced" to force it to accept.)
+		if (tempPlr.versionType != modInfo.id && !forced && !confirm("这是个不同模组的存档！你确定要载入吗？")) // Wrong save (use "Forced" to force it to accept.)
 			return;
 		player = tempPlr;
 		player.versionType = modInfo.id;

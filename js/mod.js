@@ -1,14 +1,14 @@
 let modInfo = {
-	name: "数竞树",
+	name: "The MO tree",
 	id: "xksakioi",
 	author: "xks",
-	pointsName: "思路",
+	pointsName: "thoughts",
 	modFiles: ["layers.js", "tree.js"],
 
 	discordName: "",
 	discordLink: "",
 	initialStartPoints: new Decimal (10), // Used for hard resets and new players
-	offlineLimit: 1,  // In hours
+	offlineLimit: 3.4,  // In hours
 }
 
 // Set your version in num and name
@@ -18,8 +18,8 @@ let VERSION = {
 }
 
 let changelog = `<h1>Changelog:</h1><br>
-	<h3>v0.0</h3><br>
-		- Added things.<br>
+	<h3>v0.1</h3><br>
+		- xks akioi<br>
 		- Added stuff.`
 
 let winText = `Congratulations! You have reached the end and beaten this game, but for now...`
@@ -52,6 +52,7 @@ function addedPlayerData() { return {
 
 // Display extra things at the top of the page
 var displayThings = [
+	"IAKIOI"
 ]
 
 // Determines when the game "ends"

@@ -26,10 +26,15 @@ addLayer("t", {
             description: "每秒钟多获得1点灵感。",
             cost: new Decimal(5),
             unlocked() { return player[this.layer].unlocked }, // The upgrade is only visible when this is true
-            branches: [12],
             tooltip: "起点",
         },
-
+        12: {
+            title: "准备",
+            description: "每秒钟多获得3点灵感。",
+            cost: new Decimal(20),
+            unlocked() { return player[this.layer].unlocked }, // The upgrade is only visible when this is true
+            tooltip: "准备",
+        },
     },
     row: 0, // Row the layer is in on the tree (0 is the first row)
     hotkeys: [

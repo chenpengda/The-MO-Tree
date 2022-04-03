@@ -54,7 +54,7 @@ addLayer("t", {
         21: {
             title: "积累",
             description: "每秒钟获得的灵感数随思路增加",
-            cost: new Decimal(20),
+            cost: new Decimal(10),
             unlocked() { return hasUpgrade('t', 14) }, // The upgrade is only visible when this is true
             tooltip: "积累",
             effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
@@ -67,7 +67,7 @@ addLayer("t", {
         22: {
             title: "跃进",
             description: "重置获得的思路数随灵感增加",
-            cost: new Decimal(50),
+            cost: new Decimal(20),
             unlocked() { return hasUpgrade('t', 21) }, // The upgrade is only visible when this is true
             tooltip: "跃进",
             effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values

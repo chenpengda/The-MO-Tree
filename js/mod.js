@@ -22,7 +22,7 @@ let changelog = `<h1>Changelog:</h1><br>
 		- xks akioi<br>
 		- Added stuff.`
 
-let winText = `恭喜您完成了整个游戏`
+let winText = `恭喜您完成了整个游戏，但是现在……`
 
 // If you add new functions anywhere inside of a layer, and those functions have an effect when called, add them here.
 // (The ones here are examples, all official functions are already taken care of)
@@ -43,6 +43,7 @@ function getPointGen() {
 		return new Decimal(0)
 
 	let gain = new Decimal(1)
+	if(hasUpgrade('t',11)) gain=gain.add(1)
 	return gain
 }
 

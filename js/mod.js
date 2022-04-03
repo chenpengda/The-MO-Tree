@@ -7,7 +7,7 @@ let modInfo = {
 
 	discordName: "luogu",
 	discordLink: "https://www.luogu.com.cn/",
-	initialStartPoints: new Decimal (34), // Used for hard resets and new players 硬重置时获得的点数
+	initialStartPoints: new Decimal (11.4), // Used for hard resets and new players 硬重置时获得的点数
 	offlineLimit: 3.4,  // In hours
 }
 

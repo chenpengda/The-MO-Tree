@@ -5,8 +5,8 @@ let modInfo = {
 	pointsName: "thoughts",
 	modFiles: ["layers.js", "tree.js"],
 
-	discordName: "",
-	discordLink: "",
+	discordName: "luogu",
+	discordLink: "https://www.luogu.com.cn/",
 	initialStartPoints: new Decimal (10), // Used for hard resets and new players
 	offlineLimit: 3.4,  // In hours
 }

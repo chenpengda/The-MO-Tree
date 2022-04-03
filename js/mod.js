@@ -52,7 +52,7 @@ function addedPlayerData() { return {
 
 // Display extra things at the top of the page
 var displayThings = [
-	"IAKIOI"
+	"The MO tree"
 ]
 
 // Determines when the game "ends"

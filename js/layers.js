@@ -18,7 +18,9 @@ addLayer("t", {
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
-        return new Decimal(1)
+        exp = new Decimal(1)
+        if (hasUpgrade('t', 22)) exp = exp.times(upgradeEffect('t', 22))
+        return exp
     },
     upgrades: {
         11: {
@@ -38,22 +40,22 @@ addLayer("t", {
         13: {
             title: "尝试",
             description: "每秒钟获得的灵感数翻2倍",
-            cost: new Decimal(10),
-            unlocked() { return player[this.layer].unlocked }, // The upgrade is only visible when this is true
+            cost: new Decimal(5),
+            unlocked() { return hasUpgrade('t', 12) }, // The upgrade is only visible when this is true
             tooltip: "尝试",
         },
         14: {
             title: "更多的尝试",
             description: "每秒钟获得的灵感数再翻1.8倍",
-            cost: new Decimal(20),
-            unlocked() { return player[this.layer].unlocked }, // The upgrade is only visible when this is true
+            cost: new Decimal(8),
+            unlocked() { return hasUpgrade('t', 12) }, // The upgrade is only visible when this is true
             tooltip: "更多的尝试",
         },
-        /*21: {
+        21: {
             title: "积累",
             description: "每秒钟获得的灵感数随思路增加",
-            cost: new Decimal(100),
-            unlocked() { return player[this.layer].unlocked }, // The upgrade is only visible when this is true
+            cost: new Decimal(20),
+            unlocked() { return hasUpgrade('t', 14) }, // The upgrade is only visible when this is true
             tooltip: "积累",
             effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
                 let ret = player[this.layer].points.add(1).pow(0.15) 
@@ -61,27 +63,70 @@ addLayer("t", {
                 return ret;
             },
             effectDisplay() { return format(this.effect())+"x" }, // Add formatting to the effect
-        },*/
+        },
         22: {
             title: "跃进",
-            description: "每秒钟获得的思路数随灵感增加",
+            description: "重置获得的思路数随灵感增加",
             cost: new Decimal(50),
-            unlocked() { return player[this.layer].unlocked }, // The upgrade is only visible when this is true
-            tooltip: "积累",
+            unlocked() { return hasUpgrade('t', 21) }, // The upgrade is only visible when this is true
+            tooltip: "跃进",
             effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
-                let ret = player[this.layer].points.add(1).pow(0.15) 
+                let ret = player[this.layer].points.add(1).pow(0.05) 
                 if (ret.gte("1e20000000")) ret = ret.sqrt().times("1e10000000")
                 return ret;
             },
             effectDisplay() { return format(this.effect())+"x" }, // Add formatting to the effect
-            gainMult() {
-                let mult = new Decimal(1)
-                if (hasUpgrade('t', 22)) mult = mult.times(upgradeEffect('t', 22))
-                return mult
-            },
+        },
+        23: {
+            title: "入门",
+            description: "解锁“一试”层",
+            cost: new Decimal(80),
+            unlocked() { return hasUpgrade('t', 22) }, // The upgrade is only visible when this is true
+            tooltip: "入门",
         },
     },
     row: 0, // Row the layer is in on the tree (0 is the first row)
+    hotkeys: [
+        {key: "t", description: "T: 重置思路", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+    ],
+    layerShown(){return true}
+})
+addLayer("y", {
+    name: "一试", // This is optional, only used in a few places, If absent it just uses the layer id.
+    symbol: "Y", // This appears on the layer's node. Default is the id with the first letter capitalized
+    position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
+    startData() { return {
+        unlocked: false,
+		points: new Decimal(0),
+    }},
+    branches:['t'],
+    requires: ()=>{return !hasAchievement('a',31)&&hasMilestone('c',0)&&!hasMilestone('r',1)?new Decimal(1e5):new Decimal(2000)},
+    color: "#2f4f2f",
+    requires: new Decimal(10), // Can be a function that takes requirement increases into account
+    resource: "完成的题目", // Name of prestige currency
+    baseResource: "思路", // Name of resource prestige is based on
+    baseAmount() {return player.points}, // Get the current amount of baseResource
+    type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
+    exponent: 0.7, // Prestige currency exponent
+    gainMult() { // Calculate the multiplier for main currency from bonuses
+        mult = new Decimal(1)
+        return mult
+    },
+    gainExp() { // Calculate the exponent on main currency from bonuses
+        exp = new Decimal(1)
+        return exp
+    },
+    upgrades: {
+        11: {
+            title: "起点",
+            description: "每秒钟多获得1点灵感。",
+            cost: new Decimal(1),
+            unlocked() { return player[this.layer].unlocked }, // The upgrade is only visible when this is true
+            tooltip: "起点",
+        },
+        
+    },
+    row: 1, // Row the layer is in on the tree (0 is the first row)
     hotkeys: [
         {key: "t", description: "T: 重置思路", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],

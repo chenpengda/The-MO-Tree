@@ -105,7 +105,7 @@ addLayer("y", {
     requires: new Decimal(10), // Can be a function that takes requirement increases into account
     resource: "题目", // Name of prestige currency
     baseResource: "思路", // Name of resource prestige is based on
-    baseAmount() {return player.points}, // Get the current amount of baseResource
+    baseAmount() {return player['t'].points}, // Get the current amount of baseResource
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 0.7, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
@@ -120,7 +120,7 @@ addLayer("y", {
 
     },
     milestones:{
-        0: {
+        1: {
             requirementDescription: "1 题目",
             effectDescription: "在题目重置时保留第一行思路升级。",
             done() { return player.t.points.gte(1) }

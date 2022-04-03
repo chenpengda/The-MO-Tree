@@ -89,7 +89,7 @@ addLayer("t", {
         let keep=[];
         if(resettingLayer=='y')
         {
-            if(hasMilestone('r',0)) player[this.layer].upgrades = player[this.layer].upgrades.concat([11,12,13,14]);
+            if(hasMilestone('y',0)) player[this.layer].upgrades = player[this.layer].upgrades.concat([11,12,13,14]);
         }
     },
     row: 0, // Row the layer is in on the tree (0 is the first row)
@@ -127,10 +127,10 @@ addLayer("y", {
 
     },
     milestones:{
-        1: {
+        0: {
             requirementDescription: "1 题目",
             effectDescription: "在题目重置时保留第一行思路升级。",
-            done() { return player.t.points.gte(1) }
+            done() { return player.y.points.gte(1) }
         },
     },
     row: 1, // Row the layer is in on the tree (0 is the first row)

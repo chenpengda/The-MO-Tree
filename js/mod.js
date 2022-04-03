@@ -2,7 +2,7 @@ let modInfo = {
 	name: "The MO tree",
 	id: "343434666",
 	author: "xks",
-	pointsName: "thoughts",
+	pointsName: "illusions",
 	modFiles: ["layers.js", "tree.js"],
 
 	discordName: "luogu",

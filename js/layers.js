@@ -45,18 +45,22 @@ addLayer("t", {
         14: {
             title: "更多的尝试",
             description: "每秒钟获得的灵感数再翻1.5倍",
-            cost: new Decimal(90),
+            cost: new Decimal(80),
             unlocked() { return player[this.layer].unlocked }, // The upgrade is only visible when this is true
             tooltip: "更多的尝试",
         },
-        14: {
+        21: {
             title: "积累",
             description: "每秒钟获得的灵感数随思路增加",
-            cost: new Decimal(90),
+            cost: new Decimal(100),
             unlocked() { return player[this.layer].unlocked }, // The upgrade is only visible when this is true
             tooltip: "积累",
         },
     },
+    effect() {
+        return player[this.layer].points.add(1).pow(0.5)
+    },
+    effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
     row: 0, // Row the layer is in on the tree (0 is the first row)
     hotkeys: [
         {key: "t", description: "T: 重置思路", onPress(){if (canReset(this.layer)) doReset(this.layer)}},

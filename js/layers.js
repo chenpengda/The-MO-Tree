@@ -66,7 +66,7 @@ addLayer("t", {
         },
         22: {
             title: "跃进",
-            description: "重置获得的思路数随灵感增加",
+            description: "重置获得的思路数随灵感显著增加",
             cost: new Decimal(25),
             unlocked() { return hasUpgrade('t', 21) }, // The upgrade is only visible when this is true
             tooltip: "跃进",
@@ -100,7 +100,7 @@ addLayer("t", {
     },
     row: 0, // Row the layer is in on the tree (0 is the first row)
     hotkeys: [
-        {key: "t", description: "T: 重置思路", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+        {key: "t", description: "T: 重置灵感（以获得思路）", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
     layerShown(){return true}
 })
@@ -149,6 +149,19 @@ addLayer("g", {
             },
             effectDisplay() { return format(this.effect())+"x" }, // Add formatting to the effect
         },
+        /*13: {
+            title: "不等式",
+            description: "每秒钟获得的灵感数随知识增加",
+            cost: new Decimal(7),
+            unlocked() { return false}, // The upgrade is only visible when this is true
+            tooltip: "函数",
+            effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
+                let ret = player[this.layer].points.add(1).pow(0.1) 
+                if (ret.gte("1e20000000")) ret = ret.sqrt().times("1e10000000")
+                return ret;
+            },
+            effectDisplay() { return format(this.effect())+"x" }, // Add formatting to the effect
+        },*/
     },
     milestones:{
         0: {
@@ -168,7 +181,7 @@ addLayer("g", {
         },
     },
     row: 1, // Row the layer is in on the tree (0 is the first row)
-    hotkeys: [
+    hotkeys: [{key: "g", description: "G: 重置思路（以获得知识）", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
     layerShown(){return hasUpgrade('t',23) }
 })

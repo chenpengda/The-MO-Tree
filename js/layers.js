@@ -128,7 +128,13 @@ addLayer("y", {
         return exp
     },
     upgrades: {
-
+        11: {
+            title: "集合",
+            description: "每秒钟多获得6点灵感。",
+            cost: new Decimal(1),
+            unlocked() { return player[this.layer].unlocked }, // The upgrade is only visible when this is true
+            tooltip: "集合",
+        },
     },
     milestones:{
         0: {

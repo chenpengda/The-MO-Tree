@@ -79,7 +79,7 @@ addLayer("t", {
         },
         23: {
             title: "入门",
-            description: "解锁“一试”层",
+            description: "解锁“高考”层",
             cost: new Decimal(80),
             unlocked() { return hasUpgrade('t', 22) }, // The upgrade is only visible when this is true
             tooltip: "入门",
@@ -130,14 +130,14 @@ addLayer("g", {
         11: {
             title: "集合",
             description: "每秒钟多获得4点灵感。",
-            cost: new Decimal(1),
+            cost: new Decimal(3),
             unlocked() { return player[this.layer].unlocked }, // The upgrade is only visible when this is true
             tooltip: "集合",
         },
     },
     milestones:{
         0: {
-            requirementDescription: "1 知识",
+            requirementDescription: "5 知识",
             effectDescription: "在知识重置时保留第一行思路升级。",
             done() { return player.g.points.gte(1) }
         },

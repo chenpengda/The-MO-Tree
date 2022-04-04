@@ -19,7 +19,7 @@ addLayer("t", {
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
         exp = new Decimal(1)
-        if (hasUpgrade('t', 22)) exp = exp.times(upgradeEffect('t', 22))
+        if (hasUpgrade('t', 22)) exp = exp.add(upgradeEffect('t', 22))
         return exp
     },
     upgrades: {

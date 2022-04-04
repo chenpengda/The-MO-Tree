@@ -112,7 +112,7 @@ addLayer("g", {
     }},
     branches:['t'],
     color: "#2f4f2f",
-    requires: new Decimal(1), // Can be a function that takes requirement increases into account
+    requires: new Decimal(10), // Can be a function that takes requirement increases into account
     resource: "知识", // Name of prestige currency
     baseResource: "思路", // Name of resource prestige is based on
     baseAmount() {return player['t'].points}, // Get the current amount of baseResource

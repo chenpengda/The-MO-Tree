@@ -117,8 +117,8 @@ addLayer("y", {
     resource: "题目", // Name of prestige currency
     baseResource: "思路", // Name of resource prestige is based on
     baseAmount() {return player['t'].points}, // Get the current amount of baseResource
-    type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
-    exponent: 0.7, // Prestige currency exponent
+    type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
+    exponent: 0.6, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
         return mult
@@ -130,7 +130,7 @@ addLayer("y", {
     upgrades: {
         11: {
             title: "集合",
-            description: "每秒钟多获得6点灵感。",
+            description: "每秒钟多获得4点灵感。",
             cost: new Decimal(1),
             unlocked() { return player[this.layer].unlocked }, // The upgrade is only visible when this is true
             tooltip: "集合",

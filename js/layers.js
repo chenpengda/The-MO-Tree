@@ -58,7 +58,7 @@ addLayer("t", {
             unlocked() { return hasUpgrade('t', 14) }, // The upgrade is only visible when this is true
             tooltip: "积累",
             effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
-                let ret = player[this.layer].points.add(1).pow(0.1) 
+                let ret = player[this.layer].points.add(1).pow(0.5) 
                 if (ret.gte("1e20000000")) ret = ret.sqrt().times("1e10000000")
                 return ret;
             },
@@ -71,7 +71,7 @@ addLayer("t", {
             unlocked() { return hasUpgrade('t', 21) }, // The upgrade is only visible when this is true
             tooltip: "跃进",
             effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
-                let ret = player.points.add(1).pow(0.05) 
+                let ret = player.points.add(1).pow(0.15) 
                 if (ret.gte("1e20000000")) ret = ret.sqrt().times("1e10000000")
                 return ret;
             },
@@ -93,6 +93,8 @@ addLayer("t", {
             if(resettingLayer=='g')
             {
                 if(hasMilestone('g',0)) player[this.layer].upgrades = player[this.layer].upgrades.concat([11,12,13,14]);
+                if(hasMilestone('g',1)) player[this.layer].upgrades = player[this.layer].upgrades.concat([21,22]);
+                if(hasMilestone('g',2)) player[this.layer].upgrades = player[this.layer].upgrades.concat([23]);
             }
         }
     },
@@ -116,33 +118,32 @@ addLayer("g", {
     resource: "知识", // Name of prestige currency
     baseResource: "思路", // Name of resource prestige is based on
     baseAmount() {return player['t'].points}, // Get the current amount of baseResource
-    type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
-    exponent: 0.6, // Prestige currency exponent
+    type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
+    exponent: 0.8, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
         exp = new Decimal(1)
-        if (hasUpgrade('g', 12)) exp = exp.times(upgradeEffect('g', 12))
         return exp
     },
     upgrades: {
         11: {
             title: "集合",
-            description: "每秒钟多获得4点灵感。",
-            cost: new Decimal(3),
+            description: "每秒钟多获得6点灵感，不能翻倍。",
+            cost: new Decimal(1),
             unlocked() { return player[this.layer].unlocked }, // The upgrade is only visible when this is true
             tooltip: "集合",
         },
-        11: {
+        12: {
             title: "函数",
-            description: "重置获得的题目数随思路增加",
-            cost: new Decimal(5),
+            description: "每秒钟获得的灵感数随知识增加",
+            cost: new Decimal(3),
             unlocked() { return player[this.layer].unlocked }, // The upgrade is only visible when this is true
             tooltip: "函数",
             effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
-                let ret = player[this.layer].points.add(1).pow(0.5) 
+                let ret = player[this.layer].points.add(1).pow(0.1) 
                 if (ret.gte("1e20000000")) ret = ret.sqrt().times("1e10000000")
                 return ret;
             },
@@ -151,9 +152,19 @@ addLayer("g", {
     },
     milestones:{
         0: {
-            requirementDescription: "5 知识",
+            requirementDescription: "1 知识",
             effectDescription: "在知识重置时保留第一行思路升级。",
             done() { return player.g.points.gte(1) }
+        },
+        1: {
+            requirementDescription: "3 知识",
+            effectDescription: "在知识重置时保留第二行前两个升级。",
+            done() { return player.g.points.gte(3) }
+        },
+        2: {
+            requirementDescription: "5 知识",
+            effectDescription: "在知识重置时保留第二行“入门”升级。",
+            done() { return player.g.points.gte(5) }
         },
     },
     row: 1, // Row the layer is in on the tree (0 is the first row)

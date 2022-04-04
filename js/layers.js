@@ -104,7 +104,7 @@ addLayer("t", {
     ],
     passiveGeneration(){
         ret=0
-        if(hasUpgrade('g', 13)) ret.add(upgradeEffect('g', 13))
+        if(hasUpgrade('g', 13)) ret+=0.01
         return ret
     },
     layerShown(){return true}
@@ -156,16 +156,10 @@ addLayer("g", {
         },
         13: {
             title: "不等式",
-            description: "每秒钟获得一定思路，且随知识少量增加。存在上限",
+            description: "每秒钟获得一定思路",
             cost: new Decimal(6),
             unlocked() { return player[this.layer].unlocked}, // The upgrade is only visible when this is true
             tooltip: "不等式",
-            effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
-                let ret = player[this.layer].points.add(1).pow(0.1)
-                if (ret.gte("343434666")) ret = ret.sqrt().times("343434666")
-                return ret;
-            },
-            effectDisplay() { return format(this.effect())+"x" }, // Add formatting to the effect
         },
     },
     milestones:{

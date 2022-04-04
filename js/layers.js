@@ -62,7 +62,7 @@ addLayer("t", {
                 if (ret.gte("1e20000000")) ret = ret.sqrt().times("1e10000000")
                 return ret;
             },
-            effectDisplay() { return format(this.effect())+"x" }, // Add formatting to the effect
+            effectDisplay() { return format(this.effect())+"+" }, // Add formatting to the effect
         },
         22: {
             title: "跃进",
@@ -75,7 +75,7 @@ addLayer("t", {
                 if (ret.gte("1e20000000")) ret = ret.sqrt().times("1e10000000")
                 return ret;
             },
-            effectDisplay() { return format(this.effect())+"x" }, // Add formatting to the effect
+            effectDisplay() { return format(this.effect())+"+" }, // Add formatting to the effect
         },
         23: {
             title: "入门",
@@ -143,11 +143,11 @@ addLayer("g", {
             unlocked() { return player[this.layer].unlocked }, // The upgrade is only visible when this is true
             tooltip: "函数",
             effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
-                let ret = player[this.layer].points.add(1).pow(0.1) 
+                let ret = player[this.layer].points.add(1).pow(0.5) 
                 if (ret.gte("1e20000000")) ret = ret.sqrt().times("1e10000000")
                 return ret;
             },
-            effectDisplay() { return format(this.effect())+"x" }, // Add formatting to the effect
+            effectDisplay() { return format(this.effect())+"+" }, // Add formatting to the effect
         },
         /*13: {
             title: "不等式",

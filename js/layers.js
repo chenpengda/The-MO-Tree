@@ -67,7 +67,7 @@ addLayer("t", {
         22: {
             title: "跃进",
             description: "重置获得的思路数随灵感增加",
-            cost: new Decimal(40),
+            cost: new Decimal(25),
             unlocked() { return hasUpgrade('t', 21) }, // The upgrade is only visible when this is true
             tooltip: "跃进",
             effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
@@ -111,9 +111,8 @@ addLayer("g", {
 		points: new Decimal(0),
     }},
     branches:['t'],
-    requires: ()=>{return !hasAchievement('a',31)&&hasMilestone('c',0)&&!hasMilestone('r',1)?new Decimal(1e5):new Decimal(2000)},
     color: "#2f4f2f",
-    requires: new Decimal(10), // Can be a function that takes requirement increases into account
+    requires: new Decimal(1), // Can be a function that takes requirement increases into account
     resource: "知识", // Name of prestige currency
     baseResource: "思路", // Name of resource prestige is based on
     baseAmount() {return player['t'].points}, // Get the current amount of baseResource

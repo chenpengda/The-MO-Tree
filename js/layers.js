@@ -90,9 +90,9 @@ addLayer("t", {
         if (layers[resettingLayer].row > this.row) 
         {
             layerDataReset('t', keep);
-            if(resettingLayer=='y')
+            if(resettingLayer=='g')
             {
-                if(hasMilestone('y',0)) player[this.layer].upgrades = player[this.layer].upgrades.concat([11,12,13,14]);
+                if(hasMilestone('g',0)) player[this.layer].upgrades = player[this.layer].upgrades.concat([11,12,13,14]);
             }
         }
     },
@@ -102,9 +102,9 @@ addLayer("t", {
     ],
     layerShown(){return true}
 })
-addLayer("y", {
-    name: "一试", // This is optional, only used in a few places, If absent it just uses the layer id.
-    symbol: "Y", // This appears on the layer's node. Default is the id with the first letter capitalized
+addLayer("g", {
+    name: "高考", // This is optional, only used in a few places, If absent it just uses the layer id.
+    symbol: "G", // This appears on the layer's node. Default is the id with the first letter capitalized
     position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
     startData() { return {
         unlocked: false,
@@ -114,10 +114,10 @@ addLayer("y", {
     requires: ()=>{return !hasAchievement('a',31)&&hasMilestone('c',0)&&!hasMilestone('r',1)?new Decimal(1e5):new Decimal(2000)},
     color: "#2f4f2f",
     requires: new Decimal(10), // Can be a function that takes requirement increases into account
-    resource: "题目", // Name of prestige currency
+    resource: "知识", // Name of prestige currency
     baseResource: "思路", // Name of resource prestige is based on
     baseAmount() {return player['t'].points}, // Get the current amount of baseResource
-    type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
+    type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 0.6, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
@@ -138,9 +138,9 @@ addLayer("y", {
     },
     milestones:{
         0: {
-            requirementDescription: "1 题目",
-            effectDescription: "在题目重置时保留第一行思路升级。",
-            done() { return player.y.points.gte(1) }
+            requirementDescription: "1 知识",
+            effectDescription: "在知识重置时保留第一行思路升级。",
+            done() { return player.g.points.gte(1) }
         },
     },
     row: 1, // Row the layer is in on the tree (0 is the first row)

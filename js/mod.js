@@ -8,7 +8,7 @@ let modInfo = {
 	discordName: "luogu",
 	discordLink: "https://www.luogu.com.cn/",
 	initialStartPoints: new Decimal (11.4), // Used for hard resets and new players 硬重置时获得的点数
-	offlineLimit: 3.4,  // In hours
+	offlineLimit: 0.1,  // In hours
 }
 
 // Set your version in num and name
@@ -45,7 +45,7 @@ function getPointGen() {
 	let gain = new Decimal(1)
 	if(hasUpgrade('t',11)) gain=gain.add(1)
 	if(hasUpgrade('t',12)) gain=gain.add(3)
-	if(hasUpgrade('y',11)) gain=gain.add(4)
+	if(hasUpgrade('g',11)) gain=gain.add(4)
 	if(hasUpgrade('t',13)) gain=gain.times(1.5)
 	if(hasUpgrade('t',14)) gain=gain.times(1.5)
 	if(hasUpgrade('t',21)) gain=gain.times(upgradeEffect('t',21))

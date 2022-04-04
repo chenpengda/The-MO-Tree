@@ -53,12 +53,12 @@ addLayer("t", {
         },
         21: {
             title: "积累",
-            description: "每秒钟获得的灵感数随思路增加",
+            description: "每秒钟获得的灵感数随思路显著增加",
             cost: new Decimal(10),
             unlocked() { return hasUpgrade('t', 14) }, // The upgrade is only visible when this is true
             tooltip: "积累",
             effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
-                let ret = player[this.layer].points.add(1).pow(0.05) 
+                let ret = player[this.layer].points.add(1).pow(0.1) 
                 if (ret.gte("1e20000000")) ret = ret.sqrt().times("1e10000000")
                 return ret;
             },
@@ -71,7 +71,7 @@ addLayer("t", {
             unlocked() { return hasUpgrade('t', 21) }, // The upgrade is only visible when this is true
             tooltip: "跃进",
             effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
-                let ret = player.points.add(1).pow(0.005) 
+                let ret = player.points.add(1).pow(0.05) 
                 if (ret.gte("1e20000000")) ret = ret.sqrt().times("1e10000000")
                 return ret;
             },
@@ -124,6 +124,7 @@ addLayer("g", {
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
         exp = new Decimal(1)
+        if (hasUpgrade('g', 12)) exp = exp.times(upgradeEffect('g', 12))
         return exp
     },
     upgrades: {
@@ -133,6 +134,19 @@ addLayer("g", {
             cost: new Decimal(3),
             unlocked() { return player[this.layer].unlocked }, // The upgrade is only visible when this is true
             tooltip: "集合",
+        },
+        11: {
+            title: "函数",
+            description: "重置获得的题目数随思路增加",
+            cost: new Decimal(5),
+            unlocked() { return player[this.layer].unlocked }, // The upgrade is only visible when this is true
+            tooltip: "函数",
+            effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
+                let ret = player[this.layer].points.add(1).pow(0.5) 
+                if (ret.gte("1e20000000")) ret = ret.sqrt().times("1e10000000")
+                return ret;
+            },
+            effectDisplay() { return format(this.effect())+"x" }, // Add formatting to the effect
         },
     },
     milestones:{
